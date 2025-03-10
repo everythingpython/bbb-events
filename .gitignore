@@ -1,0 +1,10 @@
+**pycache**
+**__pycache__**
+**.pytest_cache**
+**.vscode**
+**.idea**
+**.mypy_cache**
+**node_modules**
+**.DS_Store**
+**.env**
+**.venv**
