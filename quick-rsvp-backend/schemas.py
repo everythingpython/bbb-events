@@ -25,9 +25,28 @@ class EventBase(BaseModel):
 class EventCreate(EventBase):
     pass
 
-class EventOut(EventBase):
-    id: int
-    rsvps: List[RSVPOut] = []
+from pydantic import BaseModel
+from datetime import datetime
+import pytz
 
-    class Config:
-        orm_mode = True
+
+from pydantic import BaseModel
+from datetime import datetime
+from utils import convert_to_ist
+
+class EventOut(BaseModel):
+    id: int
+    name: str
+    description: str
+    date: str  # Ensure date is a string
+    location: str
+
+    @classmethod
+    def from_orm(cls, event):
+        return cls(
+            id=event.id,
+            name=event.name,
+            description=event.description,
+            date=convert_to_ist(str(event.date)),  # Ensure IST conversion!
+            location=event.location
+        )

@@ -4,6 +4,16 @@ from datetime import datetime
 from sqlalchemy.orm import relationship
 from db import Base
 
+from datetime import datetime
+import pytz
+
+IST = pytz.timezone("Asia/Kolkata")
+
+def convert_to_ist(utc_dt):
+    """Convert UTC datetime to IST (UTC+05:30)."""
+    return utc_dt.astimezone(IST).strftime("%Y-%m-%d %H:%M:%S %Z")  # Example: "2025-03-31 15:30:00 IST"
+
+
 class Event(Base):
     __tablename__ = "events"
 
